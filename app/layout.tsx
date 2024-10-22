@@ -1,7 +1,11 @@
 import { Providers } from "@/components/utilities/providers";
 import type { Metadata } from "next";
+import { getProfileByUserId, createProfile } from "@/db/queries/profiles-queries";
+import { ClerkProvider } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import localFont from "next/font/local";
 import "./globals.css";
+import Header from "@/components/header";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -19,21 +23,36 @@ export const metadata: Metadata = {
   description: "A simple todo app",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { userId } = auth();
+
+  if (userId) {
+    const profile = await getProfileByUserId(userId);
+    if (!profile) {
+      await createProfile({ userId });
+    }
+  }
+
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Providers
-        attribute='class'
-        defaultTheme="dark"
-        disableTransitionOnChange
-        >{children}</Providers>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <Providers
+            attribute="class"
+            defaultTheme="dark"
+            disableTransitionOnChange
+          >
+            <Header />
+            {children}
+          </Providers>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
