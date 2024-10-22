@@ -1,3 +1,4 @@
+// This is an ESLint configuration file. The rules are set to "off" to bypass empty variables and other specific linting rules when deploying on a web hosting platform.
 {
   "extends": ["next/core-web-vitals", "next/typescript"],
   "rules": {
