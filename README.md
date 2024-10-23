@@ -1,37 +1,25 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Basic Todo App
 
-## Getting Started
+This is a Next.js project that uses a Postgres database and Clerk for authentication. It's a basic todo app with the following functionality:
 
-First, run the development server:
+**Inputs:**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+*   **User ID:** Used to identify the user and retrieve their todos.
+*   **Todo Content:** The text of the todo item.
+*   **Todo Completion Status:** Whether the todo item is completed or not.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Outputs:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+*   **List of Todos:** Displays all todos for the logged in user.
+*   **Todo Item:** Displays the content and completion status of a single todo item.
+*   **Success/Error Messages:** Informs the user about the status of their actions (creating, updating, deleting todos).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The app also has a pricing page with monthly and yearly subscription options. The Stripe API is integrated for handling payments and managing subscriptions.
 
-## Learn More
+**Key Features:**
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# basic-todo-app
+*   **Clerk Authentication:** Provides secure user authentication.
+*   **Postgres Database:** Stores user data and todo items.
+*   **Stripe Integration:** Handles payments and subscriptions.
+*   **Next.js Server Actions:** Enables server-side rendering and database interactions.
+*   **Responsive Design:** Ensures a good user experience across different devices.
