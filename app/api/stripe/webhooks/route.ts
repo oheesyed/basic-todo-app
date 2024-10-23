@@ -49,9 +49,18 @@ export async function POST(req: Request) {
 }
 
 async function handleSubscriptionChange(event: Stripe.Event) {
+  console.log("Handling subscription change:", event.type);
   const subscription = event.data.object as Stripe.Subscription;
+  console.log("Subscription data:", JSON.stringify(subscription, null, 2));
   const productId = subscription.items.data[0].price.product as string;
-  await manageSubscriptionStatusChange(subscription.id, subscription.customer as string, productId);
+  console.log("Product ID:", productId);
+  try {
+    await manageSubscriptionStatusChange(subscription.id, subscription.customer as string, productId);
+    console.log("Subscription status change managed successfully");
+  } catch (error) {
+    console.error("Error in manageSubscriptionStatusChange:", error);
+    throw error; // Re-throw to be caught by the outer try-catch
+  }
 }
 
 async function handleCheckoutSession(event: Stripe.Event) {
